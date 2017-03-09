@@ -1,0 +1,47 @@
+---
+title: "REPORT_TITLE"
+output:
+  html_document:
+    fig_caption: yes
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_depth: 1
+  pdf_document: default
+  word_document: default
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r init stuff, message=FALSE, warning=FALSE, include=FALSE}
+## Assuming your working directory is sample-r-project's below
+## Required packages
+source("./requirements.R")
+
+## Functions needed
+source("./Functions/functions.R")
+
+## Theme(s) for ggthemr
+source("./Configuration/custom_ggthemr.R")
+
+## Project settings
+source("./Configuration/project_settings.R")
+
+## Authentication with googleapis -----------------------------------
+options(
+  googleAuthR.scopes.selected =
+    c(
+      "https://www.googleapis.com/auth/webmasters",
+      "https://www.googleapis.com/auth/analytics",
+      "https://www.googleapis.com/auth/analytics.readonly",
+      "https://www.googleapis.com/auth/devstorage.full_control",
+      "https://www.googleapis.com/auth/cloud-platform",
+      "https://www.googleapis.com/auth/bigquery",
+      "https://www.googleapis.com/auth/bigquery.insertdata"
+    )
+)
+
+# googleAuthR::gar_auth()
+# acc.list <- google_analytics_account_list()
+```
