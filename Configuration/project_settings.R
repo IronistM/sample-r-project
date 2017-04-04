@@ -17,4 +17,4 @@ options(help_type="html")
 options("repos" = c(CRAN = "https://cran.rstudio.com/"))
 
 ## Set theme default for ggthemr
-ggthemr(palette = "flat", layout = "minimal")
+# ggthemr(palette = "flat", layout = "minimal")
