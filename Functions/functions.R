@@ -59,3 +59,6 @@ ggpie <- function (data, by, totals, main=NA, pal=NA) {
   }
   p
 }
+
+## Format values as percent (%)
+format_percent <- function(x, digits = 2) paste0(round(100 * x, digits), "%")
