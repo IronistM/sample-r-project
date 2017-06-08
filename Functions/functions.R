@@ -1,5 +1,5 @@
 ## Check and install package availability
-InstalledPackage <- function(package) 
+InstalledPackage <- function(package)
 {
   available <- suppressMessages(suppressWarnings(sapply(package, require, quietly = TRUE, character.only = TRUE, warn.conflicts = FALSE)))
   missing <- package[!available]
@@ -12,19 +12,19 @@ CRANChoosen <- function()
   return(getOption("repos")["CRAN"] != "@CRAN@")
 }
 
-UsePackage <- function(package, defaultCRANmirror = "http://cran.at.r-project.org") 
+UsePackage <- function(package, defaultCRANmirror = "http://cran.at.r-project.org")
 {
   if(!InstalledPackage(package))
   {
     if(!CRANChoosen())
-    {       
+    {
       chooseCRANmirror()
       if(!CRANChoosen())
       {
         options(repos = c(CRAN = defaultCRANmirror))
       }
     }
-    
+
     suppressMessages(suppressWarnings(install.packages(package)))
     if(!InstalledPackage(package)) return(FALSE)
   }
@@ -62,3 +62,15 @@ ggpie <- function (data, by, totals, main=NA, pal=NA) {
 
 ## Format values as percent (%)
 format_percent <- function(x, digits = 2) paste0(round(100 * x, digits), "%")
+
+## Copy to clipboard
+# In Linux this is not as straightforward as in Windows, so we will use `xclip`
+# Make sure xclip is installed , eg
+# `$ whereis xclip`
+# If not then install it
+# `sudo apt-get install xclip`
+clipboard <- function(x, sep="\t", row.names=FALSE, col.names=TRUE){
+     con <- pipe("xclip -selection clipboard -i", open="w")
+     write.table(x, con, sep=sep, row.names=row.names, col.names=col.names)
+     close(con)
+}
